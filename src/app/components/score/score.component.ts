@@ -282,7 +282,9 @@ observer.observe(div, { childList: true, subtree: true });
 
   private formatNoteName(noteName: string): string {
     if (this.language !== 'it') {
-      return noteName;
+      return noteName.length > 1 && noteName.endsWith('B')
+        ? `${noteName.slice(0, -1)}b`
+        : noteName;
     }
 
     switch (noteName) {
