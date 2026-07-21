@@ -312,7 +312,9 @@ ion-app {
 
 @media screen and (max-width: 767px) {
   :root {
-    --app-top-inset: var(--app-topbar-height-mobile);
+    --app-top-inset: calc(
+      var(--app-topbar-height-mobile) + env(safe-area-inset-top, 0px)
+    );
     --app-bottom-inset: var(--app-tabbar-height);
   }
 

@@ -9,6 +9,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { IonicModule, Platform } from '@ionic/angular';
 import { StatusBar } from '@capacitor/status-bar';
+import { Capacitor } from '@capacitor/core';
 import { Microphone, PermissionStatus } from '@mozartec/capacitor-microphone';
 import { KeepAwake } from '@capacitor-community/keep-awake';
 
@@ -28,7 +29,18 @@ export class AppComponent implements AfterViewInit {
    * @param {Platform} platform - The platform service to check the current platform.
    */
   constructor(private platform: Platform) {
-    StatusBar.show(); // Show the status bar
+    void this.configureStatusBar();
+  }
+
+  private async configureStatusBar(): Promise<void> {
+    await this.platform.ready();
+
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+
+    await StatusBar.setOverlaysWebView({ overlay: false });
+    await StatusBar.show();
   }
 
   /**
