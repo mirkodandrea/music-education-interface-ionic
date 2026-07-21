@@ -41,8 +41,10 @@ ion-tab-button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
-  height: var(--app-topbar-height-mobile, 52px);
+  padding: env(safe-area-inset-top, 0px) 16px 0;
+  height: calc(
+    var(--app-topbar-height-mobile, 52px) + env(safe-area-inset-top, 0px)
+  );
   box-sizing: border-box;
   background: #ffffff;
   border-bottom: 1px solid #e5e5e5;
